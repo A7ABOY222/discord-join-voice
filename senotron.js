@@ -1,5 +1,6 @@
 const { Client } = require("discord.js");
 const { joinVoiceChannel } = require("@discordjs/voice");
+const http = require("http");
 require("dotenv").config();
 
 const client = new Client({ intents: 519 });
@@ -25,3 +26,11 @@ client.once("ready", async () => {
 });
 
 client.login(process.env.token);
+
+const PORT = process.env.PORT || 3000;
+http.createServer((req, res) => {
+  res.writeHead(200);
+  res.end("OK");
+}).listen(PORT, () => {
+  console.log(`HTTP server listening on port ${PORT}`);
+});
